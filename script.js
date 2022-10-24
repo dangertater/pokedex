@@ -2,6 +2,7 @@ let body = document.getElementById("body")
 let main = document.getElementById("main")
 let allPokemonArray = []
 let firstTwenty = []
+let secondTwenty = []
 
 let getAllPokemon = (url) => {
 	if (url === null) {
@@ -36,16 +37,16 @@ let htmlAccordianGenerator = () => {
 	for (pokemonName of firstTwenty) {
 		let accordianItem = `<div class="accordion" id="accordionExample">
         <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
+        <h2 class="accordion-header" id="headingOne">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              ${pokemonName}
+            ${pokemonName}
             </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              this ${pokemonName} is a bad motherfucker.
+            this ${pokemonName} is a bad motherfucker.
             </div>
-          </div>
+        </div>
         </div>`
 		main.innerHTML = main.innerHTML + accordianItem
 	}
