@@ -3,6 +3,28 @@ let main = document.getElementById("main")
 let allPokemonArray = []
 let firstTwenty = []
 let secondTwenty = []
+let numberWords = [
+	"One",
+	"Two",
+	"Three",
+	"Four",
+	"Five",
+	"Six",
+	"Seven",
+	"Eight",
+	"Nine",
+	"Ten",
+	"Eleven",
+	"Twelve",
+	"Thirteen",
+	"Fourteen",
+	"Fifteen",
+	"Sixteen",
+	"Seventeen",
+	"Eighteen",
+	"Nineteen",
+	"Twenty",
+]
 
 let getAllPokemon = (url) => {
 	if (url === null) {
@@ -34,20 +56,35 @@ let pushFirstTwenty = () => {
 
 let htmlAccordianGenerator = () => {
 	// return new Promise((resolve) => {
-	for (pokemonName of firstTwenty) {
-		let accordianItem = `<div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            ${pokemonName}
-            </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-            this ${pokemonName} is a bad motherfucker.
-            </div>
-        </div>
-        </div>`
+	for (let i = 0; i < 21; i++) {
+		let accordianItem = `
+			<div class="accordion" id="accordionExample">
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingOne">
+						<button
+							class="accordion-button"
+							type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#collapseOne"
+							aria-expanded="true"
+							aria-controls="collapseOne"
+						>
+							${firstTwenty[i]}
+						</button>
+					</h2>
+					<div
+						id="collapse${numberWords[i]}"
+						class="accordion-collapse collapse show"
+						aria-labelledby="headingOne"
+						data-bs-parent="#accordionExample"
+					>
+						<div class="accordion-body">
+                        ${firstTwenty[i]} is a bad motherfucker
+						</div>
+					</div>
+				</div>
+			</div>
+		`
 		main.innerHTML = main.innerHTML + accordianItem
 	}
 	// resolve()
