@@ -2,6 +2,7 @@ let body = document.getElementById("body")
 let main = document.getElementById("main")
 let serachBar = document.getElementById("searchBar")
 let searchButton = document.getElementById("searchButton")
+let pokemonNameString = document.getElementById("")
 let allPokemonArray = []
 //handling all 150 was less than fun, so doing 20 and then another 20 pokemon
 //----after 40 figure restart with async/await and do a full 150 then
@@ -71,10 +72,11 @@ let htmlAccordianGenerator = () => {
 	// return new Promise((resolve) => {
 	for (let i = 0; i < 21; i++) {
 		let accordianItem = `
-			<div class="accordion" id="${numberWords[i]}">
+			<div class="accordion" id="pokemon${numberWords[i]}">
 				<div class="accordion-item">
 					<h2 class="accordion-header" id="headingOne">
 						<button
+							id="button${firstTwenty[i]}"
 							class="accordion-button"
 							type="button"
 							data-bs-toggle="collapse"
@@ -105,6 +107,7 @@ let htmlAccordianGenerator = () => {
 	// resolve()
 	// })
 }
+//id="button${firstTwenty[i]}"
 
 //searchButton
 searchButton.addEventListener("click", (e) => {
@@ -112,9 +115,11 @@ searchButton.addEventListener("click", (e) => {
 })
 
 //search bar will filter out any pokemon whose name does not match the input text
-let searchFilter = () => {
-	for (let i = 0; i < serachBar.value.length; i++) {}
-}
+// let searchFilter = () => {
+// 	for (let i = 0; i < serachBar.value.length; i++) {
+// 		if (serachBar.value[i] === 'pseudoCode for button.innerText[i]')
+// 	}
+// }
 getAllPokemon(`https://pokeapi.co/api/v2/pokemon/`)
 
 // serachBar.attr("placeholder", "new placeholder")
