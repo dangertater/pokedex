@@ -1,5 +1,7 @@
 let body = document.getElementById("body")
 let main = document.getElementById("main")
+let serachBar = document.getElementById("searchBar")
+let searchButton = document.getElementById("searchButton")
 let allPokemonArray = []
 //handling all 150 was less than fun, so doing 20 and then another 20 pokemon
 //----after 40 figure restart with async/await and do a full 150 then
@@ -69,25 +71,27 @@ let htmlAccordianGenerator = () => {
 	// return new Promise((resolve) => {
 	for (let i = 0; i < 21; i++) {
 		let accordianItem = `
-			<div class="accordion" id="accordionExample">
+			<div class="accordion" id="${numberWords[i]}">
 				<div class="accordion-item">
 					<h2 class="accordion-header" id="headingOne">
 						<button
 							class="accordion-button"
 							type="button"
 							data-bs-toggle="collapse"
-							data-bs-target="#collapseOne"
+							data-bs-target="#collapse${numberWords[i]}"
 							aria-expanded="true"
-							aria-controls="collapseOne"
+							aria-controls="collapse${numberWords[i]}"
 						>
 							${firstTwenty[i]}
 						</button>
 					</h2>
 					<div
+//changing the below line to the looping value instead of collapseOne is when the 
+//----accordians started working independently
 						id="collapse${numberWords[i]}"
 						class="accordion-collapse collapse show"
 						aria-labelledby="headingOne"
-						data-bs-parent="#accordionExample"
+						data-bs-parent="#${numberWords[i]}"
 					>
 						<div class="accordion-body">
                         ${firstTwenty[i]} is a bad motherfucker
@@ -102,4 +106,15 @@ let htmlAccordianGenerator = () => {
 	// })
 }
 
+//searchButton
+searchButton.addEventListener("click", (e) => {
+	searchFilter()
+})
+
+//search bar will filter out any pokemon whose name does not match the input text
+let searchFilter = () => {
+	for (let i = 0; i < serachBar.value.length; i++) {}
+}
 getAllPokemon(`https://pokeapi.co/api/v2/pokemon/`)
+
+// serachBar.attr("placeholder", "new placeholder")
