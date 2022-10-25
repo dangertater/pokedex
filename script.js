@@ -1,8 +1,11 @@
 let body = document.getElementById("body")
 let main = document.getElementById("main")
 let allPokemonArray = []
+//handling all 150 was less than fun, so doing 20 and then another 20 pokemon
+//----after 40 figure restart with async/await and do a full 150 then
 let firstTwenty = []
 let secondTwenty = []
+//necessary in order to manipulate the HTML while looping
 let numberWords = [
 	"One",
 	"Two",
@@ -30,20 +33,26 @@ let getAllPokemon = (url) => {
 	if (url === null) {
 		return Promise.resolve()
 	}
-	return fetch(url)
-		.then((res) => res.json())
-		.then((data) => {
-			pushAllPokemon(data)
-			return data
-		})
-		.then(pushFirstTwenty)
-		.then(htmlAccordianGenerator)
+	return (
+		fetch(url)
+			.then((res) => res.json())
+			.then((data) => {
+				pushAllPokemon(data)
+				return data
+			})
+			//the above lines you helped me write on friday night. Each of your .then's returned arguments while mine are circumnavigating it
+			//----by making global variables. Still uses promises but unsure if it'd be best practice
+			.then(pushFirstTwenty)
+			.then(htmlAccordianGenerator)
+	)
 }
 
 let pushAllPokemon = (data) => {
 	allPokemonArray.push(data)
 }
 
+//function is simple, but i'm essentially using promise in order to chain functions together without having a reject/catch implemented
+//----should I consistantly be implementing rejects/catches for le practice?
 let pushFirstTwenty = () => {
 	return new Promise((resolve) => {
 		for (let i = 0; i < 20; i++) {
@@ -54,6 +63,8 @@ let pushFirstTwenty = () => {
 	})
 }
 
+//where the html gets updated for each pokemon, establishing generated unique accordians is still turbulant
+//----currently multiple accordians are made but they do not function independently of one another
 let htmlAccordianGenerator = () => {
 	// return new Promise((resolve) => {
 	for (let i = 0; i < 21; i++) {
@@ -92,20 +103,3 @@ let htmlAccordianGenerator = () => {
 }
 
 getAllPokemon(`https://pokeapi.co/api/v2/pokemon/`)
-
-// console.log("without json", firstTwenty[0].results)
-// console.log("with json", JSON.stringify(firstTwenty[0].results[i].name))
-
-// single accordian html below
-// <div class="accordion-item">
-// <h2 class="accordion-header" id="headingTwo">
-//   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-//     Accordion Item #2
-//   </button>
-// </h2>
-// <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-//   <div class="accordion-body">
-//     <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-//   </div>
-// </div>
-// </div>
